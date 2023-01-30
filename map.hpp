@@ -3,6 +3,8 @@
 
 # include "ft.hpp"
 
+#include <map>
+
 class map {
 };
 
