@@ -1,11 +1,14 @@
 #ifndef MAP_HPP
 # define MAP_HPP
 
-# include "ft.hpp"
+# include "iterator.hpp"
 
-#include <map>
+// #include <map>
 
-class map {
-};
+namespace ft
+{
+	class map {
+	};
+}
 
 #endif

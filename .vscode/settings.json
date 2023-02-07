@@ -40,6 +40,21 @@
 		"bit": "cpp",
 		"functional": "cpp",
 		"iterator": "cpp",
-		"utility": "cpp"
+		"utility": "cpp",
+		"__hash_table": "cpp",
+		"__string": "cpp",
+		"array": "cpp",
+		"bitset": "cpp",
+		"ios": "cpp",
+		"locale": "cpp",
+		"sstream": "cpp",
+		"string_view": "cpp",
+		"unordered_map": "cpp",
+		"__tree": "cpp",
+		"complex": "cpp",
+		"optional": "cpp",
+		"system_error": "cpp",
+		"__memory": "cpp",
+		"memory_resource": "cpp"
 	}
 }
