@@ -55,6 +55,19 @@
 		"optional": "cpp",
 		"system_error": "cpp",
 		"__memory": "cpp",
-		"memory_resource": "cpp"
+		"memory_resource": "cpp",
+		"__errc": "cpp",
+		"__locale": "cpp",
+		"__mutex_base": "cpp",
+		"__node_handle": "cpp",
+		"cctype": "cpp",
+		"cmath": "cpp",
+		"cstdarg": "cpp",
+		"cwchar": "cpp",
+		"cwctype": "cpp",
+		"istream": "cpp",
+		"mutex": "cpp",
+		"ostream": "cpp",
+		"streambuf": "cpp"
 	}
 }

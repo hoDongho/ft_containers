@@ -1,6 +1,8 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
 #include "utils.hpp"
+#include "iterator.hpp"
 
 int main()
 {
@@ -19,15 +21,25 @@ int main()
 	v3.push_back(20);
 	v3.push_back(30);
 
-	if (ft::lexicographical_compare(v1.begin(), v1.end(), v2.begin(), v2.end()))
-		std::cout << "v1 < v2" << std::endl;
+	if (ft::equal(v1.begin(), v1.end(), v2.begin()))
+		std::cout << "v1 == v2" << std::endl;
 	else
-		std::cout << "v1 >= v2" << std::endl;
+		std::cout << "v1 != v2" << std::endl;
 
-	if (ft::lexicographical_compare(v1.begin(), v1.end(), v3.begin(), v3.end()))
-		std::cout << "v1 < v3" << std::endl;
+	if (ft::equal(v1.begin(), v1.end(), v3.begin()))
+		std::cout << "v1 == v3" << std::endl;
 	else
-		std::cout << "v1 >= v3" << std::endl;
+		std::cout << "v1 != v3" << std::endl;
+
+	if (std::equal(v1.begin(), v1.end(), v2.begin()))
+		std::cout << "v1 == v2" << std::endl;
+	else
+		std::cout << "v1 != v2" << std::endl;
+
+	if (std::equal(v1.begin(), v1.end(), v3.begin()))
+		std::cout << "v1 == v3" << std::endl;
+	else
+		std::cout << "v1 != v3" << std::endl;
 
 	return (0);
 }
