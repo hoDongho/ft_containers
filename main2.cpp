@@ -7,9 +7,22 @@
 int main()
 {
 	std::vector<int> v1;
+	std::cout << v1.size() << " " << v1.capacity() << " " << v1.max_size() << " " << std::numeric_limits<ptrdiff_t>::max() << std::endl;
 	v1.push_back(10);
 	v1.push_back(20);
 	v1.push_back(30);
+	try {
+		v1.reserve(5);
+	}
+	catch (std::exception& e)
+	{
+		std::cout << e.what() << std::endl;
+	}
+	for (std::vector<int>::iterator i = v1.begin(); i != v1.end(); i++)
+	{
+		std::cout << *i << "\n";
+	}
+	std::cout << v1.size() << " " << v1.capacity() << " " << v1.max_size() << std::endl;
 
 	std::vector<int> v2;
 	v2.push_back(10);

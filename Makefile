@@ -5,7 +5,7 @@ NAME	= a.out
 
 SRCS	= main2.cpp
 OBJS	= $(SRCS:.cpp=.o)
-HEADERS	= utils.hpp
+HEADERS	= utils.hpp iterator.hpp vector.hpp
 
 ifdef DFLAG
 	CXXFLAGS += -g2 -fsanitize=address

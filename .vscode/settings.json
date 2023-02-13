@@ -68,6 +68,8 @@
 		"istream": "cpp",
 		"mutex": "cpp",
 		"ostream": "cpp",
-		"streambuf": "cpp"
+		"streambuf": "cpp",
+		"__functional_03": "cpp",
+		"iomanip": "cpp"
 	}
 }
