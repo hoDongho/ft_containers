@@ -1,3 +1,5 @@
 base.hpp
 common.hpp
 test.cpp
+a.out.dSYM/
+containers_test/
