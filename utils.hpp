@@ -7,7 +7,7 @@ namespace ft
 {
 	/* enable_if */
 
-	template < bool, typename T = void >
+	template <bool, typename T = void >
 	struct enable_if {};
 
 	template<typename T>

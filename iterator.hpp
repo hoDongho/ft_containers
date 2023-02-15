@@ -103,16 +103,16 @@ namespace ft
 		reverse_iterator	operator--(int) {
 			reverse_iterator	tmp(*this);
 			++current;
-			return (*this);
+			return (tmp);
 		};
-		reverse_iterator	operator+ (difference_type n) const {
+		reverse_iterator	operator+(difference_type n) const {
 			return (reverse_iterator(current - n));
 		};
 		reverse_iterator&	operator+=(difference_type n) {
 			current -= n;
 			return (*this);
 		};
-		reverse_iterator	operator- (difference_type n) const {
+		reverse_iterator	operator-(difference_type n) const {
 			return (reverse_iterator(current + n));
 		};
 		reverse_iterator&	operator-=(difference_type n) {
@@ -133,7 +133,7 @@ namespace ft
 
 	template <typename Iterator1, typename Iterator2>
 	bool operator<(const reverse_iterator<Iterator1>& x, const reverse_iterator<Iterator2>& y) {
-		return (x.base() < y.base());
+		return (x.base() > y.base());
 	};
 
 	template <typename Iterator1, typename Iterator2>
@@ -143,22 +143,22 @@ namespace ft
 
 	template <typename Iterator1, typename Iterator2>
 	bool operator>(const reverse_iterator<Iterator1>& x, const reverse_iterator<Iterator2>& y) {
-		return (x.base() > y.base());
+		return (x.base() < y.base());
 	};
 
 	template <typename Iterator1, typename Iterator2>
 	bool operator>=(const reverse_iterator<Iterator1>& x, const reverse_iterator<Iterator2>& y) {
-		return (x.base() >= y.base());
+		return (x.base() <= y.base());
 	};
 
 	template <typename Iterator1, typename Iterator2>
 	bool operator<=(const reverse_iterator<Iterator1>& x, const reverse_iterator<Iterator2>& y) {
-		return (x.base() <= y.base());
+		return (x.base() >= y.base());
 	};
 
-	template <class Iterator>
-	typename reverse_iterator<Iterator>::difference_type operator- (const reverse_iterator<Iterator>& lhs,
-			const reverse_iterator<Iterator>& rhs) {
+	template <typename Iterator1, typename Iterator2>
+	typename reverse_iterator<Iterator1>::difference_type operator-(const reverse_iterator<Iterator1>& lhs,
+			const reverse_iterator<Iterator2>& rhs) {
 		return (rhs.base() - lhs.base());
 	};
 
@@ -167,6 +167,7 @@ namespace ft
 			const reverse_iterator<Iterator>& x) {
 		return reverse_iterator<Iterator>((x.base() - n));
 	};
+
 }
 
 #endif

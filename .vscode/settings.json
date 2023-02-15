@@ -70,6 +70,12 @@
 		"ostream": "cpp",
 		"streambuf": "cpp",
 		"__functional_03": "cpp",
-		"iomanip": "cpp"
+		"iomanip": "cpp",
+		"__undef_macros": "cpp",
+		"list": "cpp",
+		"queue": "cpp",
+		"set": "cpp",
+		"climits": "cpp",
+		"__cxx_version": "cpp"
 	}
 }
