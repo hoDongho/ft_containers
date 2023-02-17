@@ -51,8 +51,8 @@ namespace ft
 
 	/* equal */
 
-	template <typename InputIterator1, typename InputIterator2>
-	bool	equal(InputIterator1 first1, InputIterator1 last1, InputIterator2 first2)
+	template <typename Iter1, typename Iter2>
+	bool	equal(Iter1 first1, Iter1 last1, Iter2 first2)
 	{
 		for (; first1 != last1; ++first1, ++first2)
 		{
@@ -62,9 +62,9 @@ namespace ft
 		return (true);
 	};
 
-	template <typename InputIterator1, typename InputIterator2, typename BinaryPredicate>
-	bool	equal(InputIterator1 first1, InputIterator1 last1,
-		InputIterator2 first2, BinaryPredicate pred)
+	template <typename Iter1, typename Iter2, typename BinaryPredicate>
+	bool	equal(Iter1 first1, Iter1 last1,
+		Iter2 first2, BinaryPredicate pred)
 	{
 		for (; first1 != last1; ++first1, ++first2)
 		{
@@ -76,9 +76,9 @@ namespace ft
 
 	/* lexicographical_compare */
 
-	template <typename InputIterator1, typename InputIterator2>
-	bool	lexicographical_compare(InputIterator1 first1, InputIterator1 last1,
-		InputIterator2 first2,	InputIterator2 last2)
+	template <typename Iter1, typename Iter2>
+	bool	lexicographical_compare(Iter1 first1, Iter1 last1,
+		Iter2 first2,	Iter2 last2)
 	{
 		for (; first2 != last2; ++first1, ++first2)
 		{
@@ -90,9 +90,9 @@ namespace ft
 		return (false);
 	}
 
-	template <typename InputIterator1, typename InputIterator2, typename Compare>
-	bool	lexicographical_compare(InputIterator1 first1, InputIterator1 last1,
-		InputIterator2 first2, InputIterator2 last2, Compare comp)
+	template <typename Iter1, typename Iter2, typename Compare>
+	bool	lexicographical_compare(Iter1 first1, Iter1 last1,
+		Iter2 first2, Iter2 last2, Compare comp)
 	{
 		for (; first2 != last2; ++first1, ++first2)
 		{
@@ -163,6 +163,17 @@ namespace ft
 	template <typename T1, typename T2>
 	pair<T1, T2>	make_pair(T1 x, T2 y) {
 		return (pair<T1, T2>(x, y));
+	};
+
+	/* less */
+
+	template<typename T>
+	struct less
+	{
+		bool	operator()(const T& lhs, const T& rhs)
+		{
+			return (lhs < rhs);
+		}
 	};
 }
 

@@ -15,13 +15,13 @@ namespace ft
 
 	/* iterator_traits */
 
-	template <typename Iterator>
+	template <typename Iter>
 	struct iterator_traits {
-		typedef typename Iterator::difference_type		difference_type;
-		typedef typename Iterator::value_type			value_type;
-		typedef typename Iterator::pointer				pointer;
-		typedef typename Iterator::reference			reference;
-		typedef typename Iterator::iterator_category	iterator_category;
+		typedef typename Iter::difference_type		difference_type;
+		typedef typename Iter::value_type			value_type;
+		typedef typename Iter::pointer				pointer;
+		typedef typename Iter::reference			reference;
+		typedef typename Iter::iterator_category	iterator_category;
 	};
 
 	template <typename T>
@@ -47,25 +47,25 @@ namespace ft
 
 	/* reverse_iterator */
 
-	template <typename Iterator>
+	template <typename Iter>
 	class reverse_iterator
-		: public iterator<typename iterator_traits<Iterator>::iterator_category,
-						typename iterator_traits<Iterator>::value_type,
-						typename iterator_traits<Iterator>::difference_type,
-						typename iterator_traits<Iterator>::pointer,
-						typename iterator_traits<Iterator>::reference>
+		: public iterator<typename iterator_traits<Iter>::iterator_category,
+						typename iterator_traits<Iter>::value_type,
+						typename iterator_traits<Iter>::difference_type,
+						typename iterator_traits<Iter>::pointer,
+						typename iterator_traits<Iter>::reference>
 	{
 	protected:
-		Iterator current;
+		Iter current;
 	public:
-		typedef Iterator											iterator_type;
-		typedef typename iterator_traits<Iterator>::difference_type	difference_type;
-		typedef typename iterator_traits<Iterator>::reference		reference;
-		typedef typename iterator_traits<Iterator>::pointer			pointer;
+		typedef Iter											iterator_type;
+		typedef typename iterator_traits<Iter>::difference_type	difference_type;
+		typedef typename iterator_traits<Iter>::reference		reference;
+		typedef typename iterator_traits<Iter>::pointer			pointer;
 
 		// Constructor
 		reverse_iterator(): current() {};
-		explicit reverse_iterator(Iterator x): current(x) {};
+		explicit reverse_iterator(Iter x): current(x) {};
 
 		//Copy Constructor, Assignment operator
 		template <typename U> reverse_iterator(const reverse_iterator<U>& u)
@@ -75,13 +75,13 @@ namespace ft
 			current = u.base(); return (*this);
 		};
 
-		Iterator			base() const {
+		Iter			base() const {
 			return current;
 		};
 
 		//operator overloading
 		reference			operator*() const {
-			Iterator tmp = current;
+			Iter tmp = current;
 			return (*--tmp);
 		};
 		pointer				operator->() const {
@@ -162,10 +162,10 @@ namespace ft
 		return (rhs.base() - lhs.base());
 	};
 
-	template <typename Iterator>
-	reverse_iterator<Iterator> operator+(typename reverse_iterator<Iterator>::difference_type n,
-			const reverse_iterator<Iterator>& x) {
-		return reverse_iterator<Iterator>((x.base() - n));
+	template <typename Iter>
+	reverse_iterator<Iter> operator+(typename reverse_iterator<Iter>::difference_type n,
+			const reverse_iterator<Iter>& x) {
+		return reverse_iterator<Iter>((x.base() - n));
 	};
 
 }
