@@ -4,5 +4,6 @@
 # include "utils.hpp"
 # include "iterator.hpp"
 # include "vector.hpp"
+# include "stack.hpp"
 
 #endif

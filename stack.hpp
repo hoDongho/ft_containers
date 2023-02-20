@@ -8,9 +8,7 @@
 
 namespace ft
 {
-template<typename T, typename Container = vector<T> > class stack;
-
-template<typename T, typename Container>
+template<typename T, typename Container = vector<T> >
 class stack {
 public:
 	typedef	Container									container_type;
@@ -30,13 +28,11 @@ public:
 	stack(const stack& copy)
 		:c(copy.c) {}
 
-	/* Destructor */
-	~stack() {}
-
 	/* Assign operator */
 	stack&	operator=(const stack& copy)
 	{
 		c = copy.c;
+		return (*this);
 	}
 
 	/* Element access */

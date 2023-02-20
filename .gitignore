@@ -3,3 +3,4 @@ common.hpp
 test.cpp
 a.out.dSYM/
 containers_test/
+ft_containers-terminator/

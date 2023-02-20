@@ -6,6 +6,8 @@
 # include "iterator.hpp"
 # include "utils.hpp"
 
+#include <vector>
+
 namespace ft
 {
 
@@ -39,7 +41,7 @@ public:
 
 	explicit vector(size_type n, const value_type& value = value_type(),
 					const allocator_type& alloc = allocator_type())
-		: _alloc(alloc)
+		: _begin(NULL), _end(NULL), _end_cap(NULL), _alloc(alloc)
 	{
 		if (n > 0)
 		{
@@ -61,6 +63,7 @@ public:
 	}
 
 	vector(const vector& copy)
+		: _begin(NULL), _end(NULL), _end_cap(NULL)
 	{
 		size_type size = copy.size();
 
@@ -78,13 +81,14 @@ public:
 	~vector()
 	{
 		clear();
-		_alloc.deallocate(_begin, capacity());
+		if (_begin)
+			_alloc.deallocate(_begin, capacity());
 	}
 
 	vector&	operator=(const vector& copy)
 	{
 		if (this != &copy)
-			assign(copy._begin, copy._end);
+			assign(copy.begin(), copy.end());
 		return *this;
 	}
 
@@ -129,6 +133,7 @@ public:
 	{
 		if (n > max_size())
 			throw (std::length_error("vector"));
+
 		if (n > capacity())
 		{
 			pointer new_begin, new_end;
@@ -139,7 +144,8 @@ public:
 				_alloc.construct(new_end, *i);
 
 			clear();
-			_alloc.deallocate(_begin, capacity());
+			if (_begin)
+				_alloc.deallocate(_begin, capacity());
 
 			_begin = new_begin;
 			_end = new_end;
@@ -155,13 +161,13 @@ public:
 		if (n > size())
 		{
 			reserve(n);
-			for (size_type cnt = size(); cnt < n; cnt++, ++_end)
+			for (size_type cnt = size(); cnt < n; ++cnt, ++_end)
 				_alloc.construct(_end, val);
 		}
 		else if (n < size())
 		{
-			for (size_type i = size(); i > n; --i, --_end)
-				_alloc.destroy(_begin + (i));
+			for (size_type cnt = size(); cnt > n; --cnt, --_end)
+				_alloc.destroy(_end - 1);
 		}
 	}
 
@@ -218,7 +224,8 @@ public:
 			typename ft::enable_if<!ft::is_integral<Iter>::value>::type* = 0)
 	{
 		clear();
-		insert(begin(), first, last);
+		for (; first != last; ++first)
+			push_back(*first);
 	}
 
 	void		assign(size_type n, const value_type& val)
@@ -237,6 +244,9 @@ public:
 			for (size_type cnt = 0; cnt < n; cnt++, ++new_end)
 				_alloc.construct(new_end, val);
 
+			if (_begin)
+				_alloc.deallocate(_begin, capacity());
+
 			_begin = new_begin;
 			_end = new_end;
 			_end_cap = new_begin + n;
@@ -245,14 +255,15 @@ public:
 
 	void		push_back(const value_type& x)
 	{
-		reserve(recommend(size() + 1));
+		if (_end == _end_cap)
+			reserve(recommend(size() + 1));
 		_alloc.construct(_end, x);
 		++_end;
 	}
 
 	void		pop_back()
 	{
-		_alloc.destroy(_end);
+		_alloc.destroy(_end - 1);
 		--_end;
 	}
 
@@ -288,11 +299,12 @@ public:
 				_alloc.construct(new_end, *i);
 
 			clear();
-			_alloc.deallocate(_begin, capacity());
+			if (_begin)
+				_alloc.deallocate(_begin, capacity());
 
 			_begin = new_begin;
 			_end = new_end;
-			_end_cap = _begin + new_size;
+			_end_cap = new_begin + new_size;
 		}
 		return (iterator(pos));
 	}
@@ -336,11 +348,12 @@ public:
 					_alloc.construct(new_end, *i);
 
 				clear();
-				_alloc.deallocate(_begin, capacity());
+				if (_begin)
+					_alloc.deallocate(_begin, capacity());
 
 				_begin = new_begin;
 				_end = new_end;
-				_end_cap = _begin + new_size;
+				_end_cap = new_begin + new_size;
 			}
 		}
 		return (iterator(pos));
@@ -383,18 +396,19 @@ public:
 					_alloc.construct(new_end, *i);
 
 				pos = new_end;
-				for (; first != last; ++new_end, ++first)
+				for (; first != last; ++first, ++new_end)
 					_alloc.construct(new_end, *first);
 
 				for (iterator i = tmp_pos; i != _end; ++i, ++new_end)
 					_alloc.construct(new_end, *i);
 
 				clear();
-				_alloc.deallocate(_begin, capacity());
+				if (_begin)
+					_alloc.deallocate(_begin, capacity());
 
 				_begin = new_begin;
 				_end = new_end;
-				_end_cap = _begin + new_size;
+				_end_cap = new_begin + new_size;
 			}
 		}
 		return (iterator(pos));
@@ -406,10 +420,8 @@ public:
 		pointer			ptr = _begin + pos;
 
 		for (iterator i = ptr; i + 1 != _end; ++i)
-		{
-			_alloc.destroy(i);
-			_alloc.construct(i, *(i + 1));
-		}
+			*i = *(i + 1);
+
 		--_end;
 		_alloc.destroy(_end);
 		return (iterator(ptr));
@@ -420,16 +432,12 @@ public:
 		pointer		ptr = _begin + (first - begin());
 		size_type	distance = last - first;
 
-		for (iterator i = ptr; i != last; ++i)
-			_alloc.destroy(i);
-
 		for (iterator i = ptr; i + distance != _end; ++i)
-		{
-			_alloc.construct(i, *(i + distance));
-			_alloc.destroy(i + distance);
-		}
-		_end -= distance;
-		_alloc.destroy(_end);
+			*i = *(i + distance);
+
+		for (; distance > 0; --_end, --distance)
+			_alloc.destroy(_end - 1);
+
 		return (iterator(ptr));
 	}
 
@@ -471,6 +479,11 @@ public:
 		if (cap >= maxSize / 2)
 			return (maxSize);
 		return (cap * 2 > new_size ? cap * 2 : new_size);
+	}
+
+	allocator_type get_allocator() const
+	{
+		return (_alloc);
 	}
 };
 
