@@ -24,8 +24,8 @@ public:
 	typedef typename allocator_type::const_pointer		const_pointer;
 	typedef pointer										iterator;
 	typedef const_pointer								const_iterator;
-	typedef ft::reverse_iterator<iterator>				reverse_iterator;
-	typedef ft::reverse_iterator<const_iterator>		const_reverse_iterator;
+	typedef reverse_iterator<iterator>					reverse_iterator;
+	typedef reverse_iterator<const_iterator>			const_reverse_iterator;
 
 protected:
 	pointer			_begin;
@@ -57,7 +57,7 @@ public:
 	template <typename Iter>
 	vector(Iter first, Iter last,
 			const allocator_type& alloc = allocator_type(),
-			typename ft::enable_if<!ft::is_integral<Iter>::value>::type* = 0)
+			typename enable_if<!is_integral<Iter>::value>::type* = 0)
 		: _begin(NULL), _end(NULL), _end_cap(NULL), _alloc(alloc)
 	{
 		for (; first != last; ++first)
@@ -227,7 +227,7 @@ public:
 
 	template <typename Iter>
 	void		assign(Iter first, Iter last,
-			typename ft::enable_if<!ft::is_integral<Iter>::value>::type* = 0)
+			typename enable_if<!is_integral<Iter>::value>::type* = 0)
 	{
 		clear();
 		for (; first != last; ++first)
@@ -373,7 +373,7 @@ public:
 
 	template <typename Iter>
 	iterator	insert(const_iterator position, Iter first, Iter last,
-				typename ft::enable_if<!ft::is_integral<Iter>::value>::type* = 0)
+				typename enable_if<!is_integral<Iter>::value>::type* = 0)
 	{
 		pointer		pos = _begin + (position - begin());
 		size_type	n = 0;
@@ -502,7 +502,7 @@ public:
 };
 
 template <typename T, typename Alloc>
-bool	operator==(const ft::vector<T, Alloc>& lhs, const ft::vector<T, Alloc>& rhs)
+bool	operator==(const vector<T, Alloc>& lhs, const vector<T, Alloc>& rhs)
 {
 	if (lhs.size() == rhs.size())
 	{
@@ -517,37 +517,37 @@ bool	operator==(const ft::vector<T, Alloc>& lhs, const ft::vector<T, Alloc>& rhs
 }
 
 template <typename T, typename Alloc>
-bool	operator!=(const ft::vector<T, Alloc>& lhs, const ft::vector<T, Alloc>& rhs)
+bool	operator!=(const vector<T, Alloc>& lhs, const vector<T, Alloc>& rhs)
 {
 	return (!(lhs == rhs));
 }
 
 template <typename T, typename Alloc>
-bool	operator<(const ft::vector<T, Alloc>& lhs, const ft::vector<T, Alloc>& rhs)
+bool	operator<(const vector<T, Alloc>& lhs, const vector<T, Alloc>& rhs)
 {
-	return (ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end()));
+	return (lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end()));
 }
 
 template <typename T, typename Alloc>
-bool	operator>(const ft::vector<T, Alloc>& lhs, const ft::vector<T, Alloc>& rhs)
+bool	operator>(const vector<T, Alloc>& lhs, const vector<T, Alloc>& rhs)
 {
 	return (rhs < lhs);
 }
 
 template <typename T, typename Alloc>
-bool	operator<=(const ft::vector<T, Alloc>& lhs, const ft::vector<T, Alloc>& rhs)
+bool	operator<=(const vector<T, Alloc>& lhs, const vector<T, Alloc>& rhs)
 {
 	return(!(lhs > rhs));
 }
 
 template <typename T, typename Alloc>
-bool	operator>=(const ft::vector<T, Alloc>& lhs, const ft::vector<T, Alloc>& rhs)
+bool	operator>=(const vector<T, Alloc>& lhs, const vector<T, Alloc>& rhs)
 {
 	return(!(lhs < rhs));
 }
 
 template <typename T, typename Alloc>
-void	swap(ft::vector<T, Alloc>& lhs, ft::vector<T, Alloc>& rhs)
+void	swap(vector<T, Alloc>& lhs, vector<T, Alloc>& rhs)
 {
 	lhs.swap(rhs);
 }

@@ -9,13 +9,13 @@
 
 namespace ft
 {
-template <typename Key, typename T, typename Compare = ft::less<Key>,
-			typename Alloc = std::allocator<ft::pair<const Key, T> > >
+template <typename Key, typename T, typename Compare = less<Key>,
+			typename Alloc = std::allocator<pair<const Key, T> > >
 class map {
 public:
 	typedef Key											key_type;
 	typedef T											mapped_type;
-	typedef ft::pair<const key_type, mapped_type>		value_type;
+	typedef pair<const key_type, mapped_type>			value_type;
 	typedef Compare										key_compare;
 	typedef Alloc										allocator_type;
 	typedef typename allocator_type::reference			reference;
@@ -27,8 +27,8 @@ public:
 
 	typedef implementation-defined						iterator;
 	typedef implementation-defined						const_iterator;
-	typedef ft::reverse_iterator<iterator>				reverse_iterator;
-	typedef ft::reverse_iterator<const_iterator>		const_reverse_iterator;
+	typedef reverse_iterator<iterator>					reverse_iterator;
+	typedef reverse_iterator<const_iterator>			const_reverse_iterator;
 
 	class value_compare
 	{
@@ -88,7 +88,7 @@ public:
 	/* Modifiers */
 
 	void						clear();
-	ft::pair<iterator, bool>	insert(const value_type& value);
+	pair<iterator, bool>	insert(const value_type& value);
 	iterator					insert(iterator pos, const value_type& value);
 	template <typename Iter>
 	void						insert(Iter first, Iter last);
@@ -102,8 +102,8 @@ public:
 	size_type									count(const Key& key) const;
 	iterator									find(const Key& key);
 	const_iterator								find(const Key& key) const;
-	ft::pair<iterator, iterator>				equal_range(const Key& key);
-	ft::pair<const_iterator, const_iterator>	equal_range(const Key& key) const;
+	pair<iterator, iterator>					equal_range(const Key& key);
+	pair<const_iterator, const_iterator>		equal_range(const Key& key) const;
 	iterator									lower_bound(const Key& key);
 	const_iterator								lower_bound(const Key& key) const;
 	iterator									upper_bound(const Key& key);
@@ -116,33 +116,33 @@ public:
 };
 
 template <typename Key, typename T, typename Compare, typename Alloc>
-bool	operator==(const ft::map<Key, T, Compare, Alloc>& lhs,
-					const ft::map<Key, T, Compare, Alloc>& rhs);
+bool	operator==(const map<Key, T, Compare, Alloc>& lhs,
+					const map<Key, T, Compare, Alloc>& rhs);
 
 template <typename Key, typename T, typename Compare, typename Alloc>
-bool	operator!=(const ft::map<Key, T, Compare, Alloc>& lhs,
-					const ft::map<Key, T, Compare, Alloc>& rhs);
+bool	operator!=(const map<Key, T, Compare, Alloc>& lhs,
+					const map<Key, T, Compare, Alloc>& rhs);
 
 template <typename Key, typename T, typename Compare, typename Alloc>
-bool	operator<(const ft::map<Key, T, Compare, Alloc>& lhs,
-					const ft::map<Key, T, Compare, Alloc>& rhs);
+bool	operator<(const map<Key, T, Compare, Alloc>& lhs,
+					const map<Key, T, Compare, Alloc>& rhs);
 
 template <typename Key, typename T, typename Compare, typename Alloc>
-bool	operator<=(const ft::map<Key, T, Compare, Alloc>& lhs,
-					const ft::map<Key, T, Compare, Alloc>& rhs);
+bool	operator<=(const map<Key, T, Compare, Alloc>& lhs,
+					const map<Key, T, Compare, Alloc>& rhs);
 
 template <typename Key, typename T, typename Compare, typename Alloc>
-bool	operator>(const ft::map<Key, T, Compare, Alloc>& lhs,
-					const ft::map<Key, T, Compare, Alloc>& rhs);
+bool	operator>(const map<Key, T, Compare, Alloc>& lhs,
+					const map<Key, T, Compare, Alloc>& rhs);
 
 template <typename Key, typename T, typename Compare, typename Alloc>
-bool	operator>=(const ft::map<Key, T, Compare, Alloc>& lhs,
-					const ft::map<Key, T, Compare, Alloc>& rhs);
+bool	operator>=(const map<Key, T, Compare, Alloc>& lhs,
+					const map<Key, T, Compare, Alloc>& rhs);
 
 
 template <typename Key, typename T, typename Compare, typename Alloc>
-void	swap(const ft::map<Key, T, Compare, Alloc>& lhs,
-				const ft::map<Key, T, Compare, Alloc>& rhs);
+void	swap(const map<Key, T, Compare, Alloc>& lhs,
+				const map<Key, T, Compare, Alloc>& rhs);
 
 }
 
