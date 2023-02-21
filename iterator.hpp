@@ -35,7 +35,7 @@ namespace ft
 
 	/* iterator */
 
-	template<typename Category, typename T, typename Distance = ptrdiff_t,
+	template <typename Category, typename T, typename Distance = ptrdiff_t,
 			typename Pointer = T*, typename Reference = T&>
 	struct iterator {
 		typedef T			value_type;

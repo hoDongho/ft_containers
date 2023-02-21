@@ -1,14 +1,13 @@
 #ifndef STACK_HPP
 # define STACK_HPP
 
-# include "utils.hpp"
 # include "vector.hpp"
 
 #include <stack>
 
 namespace ft
 {
-template<typename T, typename Container = vector<T> >
+template <typename T, typename Container = vector<T> >
 class stack {
 public:
 	typedef	Container									container_type;
@@ -23,10 +22,8 @@ protected:
 public:
 
 	/* Constructor */
-	explicit stack(const Container& cont = Container())
-		:c(cont) {}
-	stack(const stack& copy)
-		:c(copy.c) {}
+	explicit stack(const Container& cont = Container()) :c(cont) {}
+	stack(const stack& copy) :c(copy.c) {}
 
 	/* Assign operator */
 	stack&	operator=(const stack& copy)
@@ -36,37 +33,17 @@ public:
 	}
 
 	/* Element access */
-	reference		top()
-	{
-		return (c.back());
-	}
-
-	const_reference	top() const
-	{
-		return (c.back());
-	}
+	reference		top()		{ return (c.back()); }
+	const_reference	top() const	{ return (c.back()); }
 
 	/* Capacity */
-	bool		empty() const
-	{
-		return (c.empty());
-	}
-
-	size_type	size() const
-	{
-		return (c.size());
-	}
+	bool		empty() const	{ return (c.empty()); }
+	size_type	size() const	{ return (c.size()); }
 
 	/* Modifier */
-	void	push(const value_type&	value)
-	{
-		return (c.push_back(value));
-	}
+	void	push(const value_type&	value)	{ return (c.push_back(value)); }
 
-	void	pop()
-	{
-		return (c.pop_back());
-	}
+	void	pop()	{ return (c.pop_back()); }
 
 	/* Operator overloading*/
 
@@ -83,25 +60,25 @@ public:
 	}
 };
 
-template<class T, class Container>
+template <class T, class Container>
 bool	operator!=(const ft::stack<T, Container>& lhs, const ft::stack<T, Container>& rhs)
 {
 	return (!(lhs == rhs));
 }
 
-template<class T, class Container>
+template <class T, class Container>
 bool	operator<=(const ft::stack<T, Container>& lhs, const ft::stack<T, Container>& rhs)
 {
 	return (!(lhs > rhs));
 }
 
-template<class T, class Container>
+template <class T, class Container>
 bool	operator>(const ft::stack<T, Container>& lhs, const ft::stack<T, Container>& rhs)
 {
 	return (rhs < lhs);
 }
 
-template<class T, class Container>
+template <class T, class Container>
 bool	operator>=(const ft::stack<T, Container>& lhs, const ft::stack<T, Container>& rhs)
 {
 	return (!(lhs < rhs));

@@ -45,6 +45,8 @@ public:
 	{
 		if (n > 0)
 		{
+			if (n > max_size())
+				throw (std::length_error("vector"));
 			_begin = _end = _alloc.allocate(n);
 			for (size_type cnt = 0; cnt < n; cnt++, ++_end)
 				_alloc.construct(_end, value);
@@ -69,6 +71,8 @@ public:
 
 		if (size > 0)
 		{
+			if (size > max_size())
+				throw (std::length_error("vector"));
 			_begin = _end = _alloc.allocate(size);
 			_end_cap = _begin + size;
 
@@ -121,7 +125,7 @@ public:
 
 	size_type	capacity() const
 	{
-		return (_end_cap - _begin);
+		return (static_cast<size_type>(_end_cap - _begin));
 	}
 
 	bool		empty() const
@@ -138,6 +142,8 @@ public:
 		{
 			pointer new_begin, new_end;
 
+			if (n > max_size())
+				throw (std::length_error("vector"));
 			new_begin = new_end = _alloc.allocate(n);
 
 			for (iterator i = _begin; i != _end; ++i, ++new_end)
@@ -240,6 +246,8 @@ public:
 		{
 			pointer	new_begin, new_end;
 
+			if (n > max_size())
+				throw (std::length_error("vector"));
 			new_begin = new_end = _alloc.allocate(n);
 			for (size_type cnt = 0; cnt < n; cnt++, ++new_end)
 				_alloc.construct(new_end, val);
@@ -286,6 +294,8 @@ public:
 			pointer	new_begin, new_end, tmp_pos = pos;
 			size_type	new_size = recommend(size() + 1);
 
+			if (new_size > max_size())
+				throw (std::length_error("vector"));
 			new_begin = new_end = _alloc.allocate(new_size);
 
 			for (iterator i = _begin; i != tmp_pos; ++i, ++new_end)
@@ -335,6 +345,8 @@ public:
 				pointer		new_begin, new_end, tmp_pos = pos;
 				size_type	new_size = recommend(size() + n);
 
+				if (new_size > max_size())
+					throw (std::length_error("vector"));
 				new_begin = new_end = _alloc.allocate(new_size);
 
 				for (iterator i = _begin; i != tmp_pos; ++i, ++new_end)
@@ -390,6 +402,8 @@ public:
 				pointer	new_begin, new_end, tmp_pos = pos;
 				size_type	new_size = recommend(size() + n);
 
+				if (new_size > max_size())
+					throw (std::length_error("vector"));
 				new_begin = new_end = _alloc.allocate(new_size);
 
 				for (iterator i = _begin; i != tmp_pos; ++i, ++new_end)

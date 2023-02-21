@@ -9,8 +9,8 @@
 
 namespace ft
 {
-template<typename Key, typename T, typename Compare = ft::less<Key>,
-			typename Alloc = std::allocator<ft::pair<const Key, T>>>
+template <typename Key, typename T, typename Compare = ft::less<Key>,
+			typename Alloc = std::allocator<ft::pair<const Key, T> > >
 class map {
 public:
 	typedef Key											key_type;
@@ -34,12 +34,12 @@ public:
 	{
 			friend class map;
 		protected:
-			key_compare comp;
+			key_compare _comp;
 
-			value_compare(key_compare c) : comp(c) {}
+			value_compare(key_compare c) : _comp(c) {}
 		public:
 			bool	operator()(const value_type& x, const value_type& y) const
-			{ return (comp(x.first, y.first)); }
+			{ return (_comp(x.first, y.first)); }
 	}
 
 	private:
@@ -48,7 +48,7 @@ public:
 	/* Constructor */
 
 	explicit map(const Compare& comp, const Alloc& alloc = Alloc());
-	template<typename Iter>
+	template <typename Iter>
 	map(Iter first, Iter last, const Compare& comp, const Alloc& alloc = Alloc());
 	map(const map& copy);
 
@@ -90,7 +90,7 @@ public:
 	void						clear();
 	ft::pair<iterator, bool>	insert(const value_type& value);
 	iterator					insert(iterator pos, const value_type& value);
-	template<typename Iter>
+	template <typename Iter>
 	void						insert(Iter first, Iter last);
 	iterator					erase(iterator pos);
 	iterator					erase(iterator first, iterator last);
@@ -115,32 +115,32 @@ public:
 	value_compare	value_comp() const;
 };
 
-template<typename Key, typename T, typename Compare, typename Alloc>
+template <typename Key, typename T, typename Compare, typename Alloc>
 bool	operator==(const ft::map<Key, T, Compare, Alloc>& lhs,
 					const ft::map<Key, T, Compare, Alloc>& rhs);
 
-template<typename Key, typename T, typename Compare, typename Alloc>
+template <typename Key, typename T, typename Compare, typename Alloc>
 bool	operator!=(const ft::map<Key, T, Compare, Alloc>& lhs,
 					const ft::map<Key, T, Compare, Alloc>& rhs);
 
-template<typename Key, typename T, typename Compare, typename Alloc>
+template <typename Key, typename T, typename Compare, typename Alloc>
 bool	operator<(const ft::map<Key, T, Compare, Alloc>& lhs,
 					const ft::map<Key, T, Compare, Alloc>& rhs);
 
-template<typename Key, typename T, typename Compare, typename Alloc>
+template <typename Key, typename T, typename Compare, typename Alloc>
 bool	operator<=(const ft::map<Key, T, Compare, Alloc>& lhs,
 					const ft::map<Key, T, Compare, Alloc>& rhs);
 
-template<typename Key, typename T, typename Compare, typename Alloc>
+template <typename Key, typename T, typename Compare, typename Alloc>
 bool	operator>(const ft::map<Key, T, Compare, Alloc>& lhs,
 					const ft::map<Key, T, Compare, Alloc>& rhs);
 
-template<typename Key, typename T, typename Compare, typename Alloc>
+template <typename Key, typename T, typename Compare, typename Alloc>
 bool	operator>=(const ft::map<Key, T, Compare, Alloc>& lhs,
 					const ft::map<Key, T, Compare, Alloc>& rhs);
 
 
-template<typename Key, typename T, typename Compare, typename Alloc>
+template <typename Key, typename T, typename Compare, typename Alloc>
 void	swap(const ft::map<Key, T, Compare, Alloc>& lhs,
 				const ft::map<Key, T, Compare, Alloc>& rhs);
 
